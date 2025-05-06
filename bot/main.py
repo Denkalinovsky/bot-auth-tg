@@ -30,7 +30,7 @@ async def start(update: Update, context):
 
 def main():
     if not TELEGRAM_BOT_TOKEN:
-        print("TELEGRAM_BOT_TOKEN is not set!")
+        logger.error("TELEGRAM_BOT_TOKEN is not set!")
         return
     
     application = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
@@ -50,21 +50,8 @@ def main():
     from .handlers.subscriptions import handle_subscription_callback
     application.add_handler(CallbackQueryHandler(handle_subscription_callback, pattern="^sub_"))
     
-    # Для локальной разработки используем polling
-    if os.getenv('VERCEL') is None:
-        application.run_polling(allowed_updates=Update.ALL_TYPES, drop_pending_updates=True)
-    else:
-        # Для Vercel используем webhook
-        webhook_url = os.getenv('WEBHOOK_URL')
-        if not webhook_url:
-            logger.error("WEBHOOK_URL is not set!")
-            return
-        application.run_webhook(
-            listen='0.0.0.0',
-            port=int(os.getenv('PORT', 8080)),
-            webhook_url=webhook_url,
-            allowed_updates=Update.ALL_TYPES
-        )
+    # Запускаем бота в режиме polling
+    application.run_polling(allowed_updates=Update.ALL_TYPES, drop_pending_updates=True)
 
 if __name__ == '__main__':
     main() 
