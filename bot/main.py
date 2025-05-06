@@ -1,12 +1,12 @@
 from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQueryHandler, filters
-from .config import TELEGRAM_BOT_TOKEN
-from .handlers.balance import show_balance
-from .handlers.payments import show_payment_options, handle_payment_callback
-from .handlers.auth import generate_code
-from .handlers.help import show_help
-from .handlers.links import show_links
-from .handlers.subscriptions import show_subscriptions
-from .handlers.subscriptions import activate_subscription  # если понадобится
+from bot.config import TELEGRAM_BOT_TOKEN
+from bot.handlers.balance import show_balance
+from bot.handlers.payments import show_payment_options, handle_payment_callback
+from bot.handlers.auth import generate_code
+from bot.handlers.help import show_help
+from bot.handlers.links import show_links
+from bot.handlers.subscriptions import show_subscriptions
+from bot.handlers.subscriptions import activate_subscription  # если понадобится
 
 from telegram import Update
 import logging
@@ -47,7 +47,7 @@ def main():
     application.add_handler(MessageHandler(filters.Regex("^🎯 Подписки$"), show_subscriptions))
     application.add_handler(CallbackQueryHandler(handle_payment_callback, pattern="^pay_"))
     # Подписки (активация)
-    from .handlers.subscriptions import handle_subscription_callback
+    from bot.handlers.subscriptions import handle_subscription_callback
     application.add_handler(CallbackQueryHandler(handle_subscription_callback, pattern="^sub_"))
     
     # Запускаем бота в режиме polling
