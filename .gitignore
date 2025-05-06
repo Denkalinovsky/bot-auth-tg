@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtualenv
+venv/
+.env/
+.venv/
+ENV/
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env files
+.env
+.env.*
+
+# Logs
+*.log
+
+# Mongo dumps/backups
+*.bson
+*.json
+*.gz
+
+# JWT tokens, secrets, etc
+*.pem
+*.key
+
+# Misc
+*.sqlite3
+
+# Ignore test cache
+.pytest_cache/
+
+# Ignore coverage
+.coverage
+htmlcov/
+
+# Ignore build
+build/
+dist/
+*.egg-info/
